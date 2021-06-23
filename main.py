@@ -1,0 +1,86 @@
+projectile: Sprite = None
+choice = 0
+mySprite = sprites.create(img("""
+        . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . .
+    """),
+    SpriteKind.player)
+controller.move_sprite(mySprite, controller.dx(), 100)
+mySprite.set_stay_in_screen(True)
+info.set_life(3)
+
+def on_update_interval():
+    global choice, projectile
+    choice = randint(1, 0)
+    if choice == 1:
+        projectile = sprites.create_projectile_from_sprite(img("""
+                ..............................
+                            ......1.......................
+                            .....f.c......................
+                            ......b....cb.cb..............
+                            ...........cf.cd.........b....
+                            ...........cf.cb........1.c...
+                            .....c.....cb.cf.....c...f....
+                            d....bc....cb.cf....cd........
+                            ...c..ff.cffccfcfc.cf..c......
+                            ...fcd..fcccccccccfb..cf......
+                            .....c.fcccccccccccf.cf.......
+                            ......ccccccccbccccbfb........
+                            .....fcbcccccccccccccf........
+                            .cccccccccfcccccfccccc........
+                            .ffbbfcccdcccccccdcccfbfbf....
+                            .....ccccccccccccccccfcccc....
+                            .....cccbccccbcccccbcc.......d
+                            .cccccccccccccccccccccbdfb....
+                            .bbfbfcccccccccbcccccfcccc....
+                            .....fccccccccccccccc.........
+                            ......fcccbcccccccccf.........
+                            .....b.fcccccccccccc.f........
+                            ....fc..fccccccbcccf.cb.......
+                            ...dc.....ffcfcccfc...fb......
+                            ...c..bc...cb.cb...cb..c......
+                            .....fc....cd.cf....cf......c.
+                            .....c.....cb.cf.....c.....b.f
+                            ...........cf.cb............1.
+                            ..............................
+                            ..............................
+            """),
+            mySprite,
+            -100,
+            100)
+    else:
+        projectile = sprites.create(img("""
+                . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . . 
+                            . . . . . . . . . . . . . . . .
+            """),
+            SpriteKind.player)
+    projectile.y = randint(10, 0)
+game.on_update_interval(500, on_update_interval)
